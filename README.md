@@ -1,4 +1,4 @@
-[![Open in colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/gprzy/PETR4.SA-forecasting/main/PETR4.SA-forecasting.ipynb)
+[![Open in colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/gprzy/PETR4.SA-forecasting/blob/main/PETR4.SA-forecasting.ipynb)
 
 # PETR4.SA-forecasting
 A collection of PIBIC 2020-2021 codes. Statistical models of time series analysis applied to stock market predictions, compared to CNN and LSTM forecasts. Trading simulation with PETR4.SA stocks.
