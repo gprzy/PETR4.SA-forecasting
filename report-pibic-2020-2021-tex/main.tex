@@ -1,0 +1,579 @@
+\documentclass[
+	% -- opções da classe memoir --
+	12pt,				% tamanho da fonte
+	openany,			% capítulos começam em pág ímpar (insere página vazia caso preciso)
+	oneside,
+	%twoside,			% para impressão em recto e verso. Oposto a oneside
+	a4paper,			% tamanho do papel. 
+	% -- opções da classe abntex2 --
+	%chapter=TITLE,		% títulos de capítulos convertidos em letras maiúsculas
+	%section=TITLE,		% títulos de seções convertidos em letras maiúsculas
+	%subsection=TITLE,	% títulos de subseções convertidos em letras maiúsculas
+	%subsubsection=TITLE,% títulos de subsubseções convertidos em letras maiúsculas
+	% -- opções do pacote babel --
+	english,			% idioma adicional para hifenização
+	spanish,			% idioma adicional para hifenização
+	brazil				% o último idioma é o principal do documento
+	]{ufscar}
+	
+\usepackage[utf8]{inputenc}
+\usepackage{relsize}
+\usepackage{lmodern}			% Usa a fonte Latin Modern		
+\usepackage[T1]{fontenc}		% Selecao de codigos de fonte.
+\usepackage{indentfirst}		% Indenta o primeiro parágrafo de cada seção.
+\usepackage{color}				% Controle das cores
+\usepackage{graphicx}			% Inclusão de gráficos
+\usepackage{microtype} 			% para melhorias de justificação
+\usepackage{pdfpages}
+\usepackage{listings}
+
+% ---
+% Pacotes de citações
+% ---
+\usepackage[brazilian,hyperpageref]{backref}	 % Paginas com as citações na bibl
+\usepackage[alf]{abntex2cite}	% Citações padrão ABNT
+
+\usepackage{amsmath}
+\usepackage{multirow}
+\usepackage[flushleft]{threeparttable}
+\usepackage{subcaption}
+%\usepackage{graphicx}
+\usepackage{lscape}
+\usepackage{longtable}
+\usepackage{tabularx}
+\usepackage{array}
+\usepackage[table]{xcolor}
+%\usepackage[pdftex]{hyperref}
+\usepackage{algpseudocode,algorithm}
+\usepackage{longtable}
+%\usepackage[page]{appendix}
+\usepackage{emptypage}
+
+%\usepackage[sectionbib]{bibunits}
+
+% \renewcommand*{\cftchaptername}{CAPÍTULO\space}
+ 
+\definecolor{lightgray2}{RGB}{238,238,238}
+
+% --- 
+% CONFIGURAÇÕES DE PACOTES
+% --- 
+
+% ---
+% Configurações do pacote backref
+% Usado sem a opção hyperpageref de backref
+\renewcommand{\backrefpagesname}{Citado na(s) página(s):~}
+% Texto padrão antes do número das páginas
+\renewcommand{\backref}{}
+% Define os textos da citação
+\renewcommand*{\backrefalt}[4]{
+	\ifcase #1 %
+		Nenhuma citação no texto.%
+	\or
+		Citado na página #2.%
+	\else
+		Citado #1 vezes nas páginas #2.%
+	\fi}%
+% ---
+
+\newcommand{\textnumero}{
+    N\textsuperscript{\underline{o}}
+}
+
+
+% ---
+% Informações de dados para CAPA e FOLHA DE ROSTO
+% ---
+\titulo{RELATÓRIO FINAL}
+\autor{GABRIEL HENRIQUE PRZYTOCKI}
+\local{CURITIBA}
+\data{2021}
+\orientador[Orientação]{JÚLIO CESAR NIEVOLA}
+\instituicao{%
+PONTIFÍCIA UNIVERSIDADE CATÓLICA DO PARANÁ
+  \par
+  PRÓ-REITORIA DE PESQUISA, PÓS-GRADUAÇÃO E INOVAÇÃO
+PROGRAMA INSTITUCIONAL DE BOLSAS DE INICIAÇÃO CIENTÍFICA}
+\tipotrabalho{Relatório Final}
+% O preambulo deve conter o tipo do trabalho, o objetivo, 
+% o nome da instituição e a área de concentração 
+\preambulo{Relatório Final apresentado ao Programa Institucional de Bolsas de Iniciação Científica, Pró-Reitoria de Pesquisa e Pós-Graduação da Pontifícia Universidade Católica do Paraná, e órgãos de fomento, sob orientação do \textbf{Prof. Dr. Júlio Cesar Nievola}.}
+% ---
+
+% ---
+% Configurações de aparência do PDF final
+
+% alterando o aspecto da cor azul
+\definecolor{blue}{RGB}{41,5,195}
+
+% informações do PDF
+\makeatletter
+\hypersetup{
+     	%pagebackref=true,
+		pdftitle={\@title}, 
+		pdfauthor={\@author},
+    	pdfsubject={\imprimirpreambulo},
+	    pdfcreator={LaTeX with abnTeX2},
+		pdfkeywords={abnt}{latex}{abntex}{abntex2}{trabalho acadêmico}, 
+		colorlinks=true,       		% false: boxed links; true: colored links
+    	linkcolor=blue,          	% color of internal links
+    	citecolor=blue,        		% color of links to bibliography
+    	filecolor=magenta,      		% color of file links
+		urlcolor=blue,
+		bookmarksdepth=4
+}
+\makeatother
+% --- 
+
+% ---
+% Posiciona figuras e tabelas no topo da página quando adicionadas sozinhas
+% em um página em branco. Ver https://github.com/abntex/abntex2/issues/170
+\makeatletter
+\setlength{\@fptop}{5pt} % Set distance from top of page to first float
+\makeatother
+% ---
+
+% ---
+% Possibilita criação de Quadros e Lista de quadros.
+% Ver https://github.com/abntex/abntex2/issues/176
+%
+
+% ---
+% inserir lista de algoritmos
+% ---
+%\pdfbookmark[0]{\listalgorithmcfname}{loa}
+%\makeatletter
+%\renewcommand\numberline[1]{
+    %Algoritmo \normalfont #1 – }
+%\makeatother
+%\listofalgorithms
+%\cleardoublepage
+
+%\makeatletter
+%\def\numberline#1{\hb@xt@\@tempdima{#1\hfil}}
+%\makeatother
+% ---
+
+%------LISTA DE ALGORITMOS---------------------------------------------
+%\newcommand{\algoritmoname}{algoritmo}
+%\newcommand{\listalgorithmcfname}{Lista de Algoritmos}
+
+%\newlistof{listofalgoritmos}{loa}{\listalgorithmcfname}
+%\renewcommand{\listalgorithmcfname}{Lista de Algoritmos}%
+%\newlistentry{algoritmo}{loa}{0}
+
+
+% configurações para atender às regras da ABNT
+%\setfloatadjustment{algoritmo}{\centering}
+%\counterwithout{algoritmo}{section}
+%\renewcommand{\cftalgoritmoname}{\algoritmoname\newline} 
+%\renewcommand*{\cftalgoritmoaftersnum}{\hfill--\hfill}
+
+\makeatletter
+\def\numberline#1{\hb@xt@\@tempdima{#1\hfil}}
+\makeatother
+
+%\setfloatlocations{algoritmo}{hbtp} % Ver https://github.com/abntex/abntex2/issues/176
+% ---
+
+% --- 
+% Espaçamentos entre linhas e parágrafos 
+% --- 
+
+% O tamanho do parágrafo é dado por:
+\setlength{\parindent}{1.3cm}
+
+% Controle do espaçamento entre um parágrafo e outro:
+\setlength{\parskip}{0.2cm}  % tente também \onelineskip
+
+% ---
+% compila o indice
+% ---
+\makeindex
+% ---
+
+% Lista de simbolos
+\makeatletter
+
+\newcommand{\simbolo}[2]{\addcontentsline{lsb}{simb}{\numberline{#1}{#2}}}
+
+\newcommand{\l@simb}[2]{
+	\vskip -0.5cm
+	\leftskip 0.0cm
+	\parfillskip -\rightskip
+	\parindent 0cm
+	\@tempdima 2.5cm
+	\advance\leftskip \@tempdima \null\nobreak\hskip -\leftskip
+	{\normalfont {#1}}\nobreak \filltocentry{#2}
+}
+
+\newcommand{\imprimirlistadesimbolos}
+{
+	\pretextualchapter{\listadesimbolosname}\@starttoc{lsb}
+	\cleardoublepage
+}
+
+\makeatother
+% Fim lista de simbolos
+
+% Lista de abreviacoes
+% 
+\newcommand{\imprimirlistadesiglas}{%
+	    \pdfbookmark[0]{\listadesiglasname}{acn}	
+		\printacronyms[%
+				style=mylong1,
+				title={\listadesiglasname \vspace{-0.2cm}}  % A lista de siglas ainda fica com um espaço a mais
+			  ]
+		\cleardoublepage
+}
+% Fim lista de abreviacoes
+
+\usepackage[brazil]{babel}
+\addto\captionsbrazil{\renewcommand{\listfigurename}{Lista de Figuras}}
+\addto\captionsbrazil{\renewcommand{\listtablename}{Lista de Tabelas}}
+\addto\captionsbrazil{\renewcommand{\listadesimbolosname}{Lista de Símbolos}}
+\addto\captionsbrazil{\renewcommand{\listadesiglasname}{Lista de Abreviações}}
+%\addto\captionsbrazil{\renewcommand{\listofalgorithms}{Lista de Algoritmos}}
+
+\usepackage{listings}
+\usepackage{xcolor}
+
+\definecolor{corComentario}{RGB}{150,150,150}
+\definecolor{corString}{RGB}{206,123,0}
+\definecolor{corPalavraChave}{RGB}{0,0,230}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+
+\lstset{
+	numbers=left,
+	stepnumber=1,
+	firstnumber=1,
+	numberstyle=\tiny\color{codegray},
+	extendedchars=true,
+	breaklines=true,
+	lineskip=0pt,
+	frame=tb,
+	basicstyle=\ttfamily\scriptsize,
+	showstringspaces=false,
+	stringstyle=\color{corString},
+	commentstyle=\color{corComentario},
+	keywordstyle=\color{corPalavraChave}
+}
+
+%\lstset{style=mystyle}
+
+\setlength\extrarowheight{7pt}
+
+
+\renewcommand{\listalgorithmname}{Lista de Algoritmos}
+
+
+% -------------------------------------------------------------------------------------------------
+% Início do documento
+% -------------------------------------------------------------------------------------------------
+
+
+\begin{document}
+
+\frontmatter
+
+\renewcommand{\listfigurename}{Lista de Figuras}
+\renewcommand{\listtablename}{Lista de Tabelas}
+\renewcommand{\listadesimbolosname}{Lista de Símbolos}
+\renewcommand{\listadesiglasname}{Lista de Abreviações}
+%\renewcommand{\listofalgorithms}{Lista de Algoritmos}
+
+% Seleciona o idioma do documento (conforme pacotes do babel)
+%\selectlanguage{english}
+\selectlanguage{brazil}
+
+% Retira espaço extra obsoleto entre as frases.
+\frenchspacing 
+
+% Declaracoes em Português
+\algrenewcommand\algorithmicend{\textbf{fim}}
+\algrenewcommand\algorithmicdo{\textbf{faça}}
+\algrenewcommand\algorithmicwhile{\textbf{enquanto}}
+\algrenewcommand\algorithmicfor{\textbf{para}}
+\algrenewcommand\algorithmicif{\textbf{se}}
+\algrenewcommand\algorithmicthen{\textbf{então}}
+\algrenewcommand\algorithmicelse{\textbf{senão}}
+\algrenewcommand\algorithmicreturn{\textbf{devolve}}
+\algrenewcommand\algorithmicfunction{\textbf{função}}
+
+% Rearranja os finais de cada estrutura
+\algrenewtext{EndWhile}{\algorithmicend\ \algorithmicwhile}
+\algrenewtext{EndFor}{\algorithmicend\ \algorithmicfor}
+\algrenewtext{EndIf}{\algorithmicend\ \algorithmicif}
+\algrenewtext{EndFunction}{\algorithmicend\ \algorithmicfunction}
+
+% O comando For, a seguir, retorna 'para #1 -- #2 até #3 faça'
+\algnewcommand\algorithmicto{\textbf{até}}
+\algrenewtext{For}[3]%
+{\algorithmicfor\ #1 $\gets$ #2 \algorithmicto\ #3 \algorithmicdo}
+
+% ----------------------------------------------------------
+% ELEMENTOS PRÉ-TEXTUAIS
+% ----------------------------------------------------------
+% \pretextual
+
+% ---
+% Capa
+% ---
+\imprimircapa
+% ---
+
+% ---
+% Folha de rosto
+% (o * indica que haverá a ficha bibliográfica)
+% ---
+\imprimirfolhaderosto*
+% ---
+
+% ---
+% Inserir a ficha bibliografica
+% ---
+
+% Isto é um exemplo de Ficha Catalográfica, ou ``Dados internacionais de
+% catalogação-na-publicação''. Você pode utilizar este modelo como referência. 
+% Porém, provavelmente a biblioteca da sua universidade lhe fornecerá um PDF
+% com a ficha catalográfica definitiva após a defesa do trabalho. Quando estiver
+% com o documento, salve-o como PDF no diretório do seu projeto e substitua todo
+% o conteúdo de implementação deste arquivo pelo comando abaixo:
+%
+% \begin{fichacatalografica}
+%     \includepdf{fig_ficha_catalografica.pdf}
+% \end{fichacatalografica}
+
+\begin{fichacatalografica}
+
+%%%%%%%%%%%%%%%% ATENCAO %%%%%%%%%%%%%%%%%%%%%%%
+% Apos gerar ficha catalografica remove comentário a linha abaixo e fazer upload do arquivo ficha_catalografica.pdf %	
+
+%\includepdf{ficha_catalografica.pdf}
+
+\end{fichacatalografica}
+% ---
+
+% ---
+
+% ---
+% Inserir folha de aprovação
+% ---
+
+% Isto é um exemplo de Folha de aprovação, elemento obrigatório da NBR
+% 14724/2011 (seção 4.2.1.3). Você pode utilizar este modelo até a aprovação
+% do trabalho. Após isso, substitua todo o conteúdo deste arquivo por uma
+% imagem da página assinada pela banca com o comando abaixo:
+%
+% \begin{folhadeaprovacao}
+% \includepdf{folhadeaprovacao_final.pdf}
+% \end{folhadeaprovacao}
+%
+\begin{folhadeaprovacao}
+
+%%%%%%%%%%%%%%%% ATENCAO %%%%%%%%%%%%%%%%%%%%%%%
+%Remover comentario da linha abaixo e fazer upload do arquivo folha-de-aprovacao.pdf %	
+
+% \includepdf{folha-de-aprovacao.pdf}
+  
+\end{folhadeaprovacao}
+% ---
+
+% ---
+% Dedicatória
+% ---
+%\begin{dedicatoria}
+   %\vspace*{\fill}
+   %\centering
+   %\noindent
+   %\textit{ Dedico este trabalho a todos os alunos de pós-graduação da UFSCar que queiram utilizar o LaTex.} \vspace*{\fill}
+%\end{dedicatoria}
+% ---
+
+% ---
+% Agradecimentos
+% ---
+%\begin{agradecimentos}
+%Agradecimentos
+
+%\end{agradecimentos}
+
+%CAPES
+%O presente trabalho foi realizado com apoio da Coordenação de Aperfeiçoamento de Pessoal de Nível Superior - Brasil (CAPES) - Código de Financiamento 001
+
+% ---
+
+% ---
+% Epígrafe
+% ---
+%\begin{epigrafe}
+    %\vspace*{\fill}
+	%\begin{flushright}
+		%\textit{``Toda a obra de um homem, seja em literatura, música, pintura, arquitetura ou em qualquer outra coisa, é sempre um auto-retrato; e quanto mais ele se tentar esconder, mais o seu caráter se revelará, contra a sua vontade.\\
+		%(Samuel Butler)}
+	%\end{flushright}
+%\end{epigrafe}
+% ---
+
+\pagenumbering{roman}
+
+% ---
+% inserir lista de ilustrações
+% ---
+\pdfbookmark[0]{\listfigurename}{lof}
+\setcounter{page}{3}
+\addcontentsline{toc}{section}{LISTA DE FIGURAS}
+
+\listoffigures*
+\cleardoublepage
+% ---
+
+% ---
+% inserir lista de tabelas
+% ---
+\pdfbookmark[0]{\listtablename}{lot}
+\setcounter{page}{4}
+\addcontentsline{toc}{section}{LISTA DE TABELAS}
+
+\listoftables*
+\cleardoublepage
+% ---
+
+% ---
+% inserir lista de algoritmos
+% ---
+%\newfloat[section]{algoritmo}{loa}{\listofalgoritmosname}
+% ---
+% inserir lista de algoritmos
+% ---
+%\pdfbookmark[0]{\listalgorithmcfname}{loa}
+\addcontentsline{toc}{section}{LISTA DE ALGORITMOS}
+%\renewcommand{\listalgorithmcfname}{Lista de Algoritmos}%
+%\makeatletter
+%\renewcommand\numberline[1]{
+    %Algoritmo \normalfont #1 – }
+%\makeatother
+%\renewcommand{\listalgorithmcfname}{List of Algorithmus}
+\listofalgorithms
+\setcounter{page}{5}
+\cleardoublepage
+
+\makeatletter
+\def\numberline#1{\hb@xt@\@tempdima{#1\hfil}}
+\makeatother
+% ---
+%\pdfbookmark[0]{\listofalgoritmosname}{loa}
+%\listofalgoritmos*
+%\cleardoublepage
+% ---
+
+% Lista de simbolos
+\begin{simbolos}
+\setcounter{page}{6}
+\addcontentsline{toc}{section}{LISTA DE SÍMBOLOS}
+\item[$ \vec{p_c} $] \textit{array com preços de fechamento de uma determinada ação}
+\item[$ \vec{p_p} $] \textit{array com preços previstos por algum modelo para os fechamentos de uma ação}
+\item[$ c $] \textit{carteira inicial para uma operação de trading}
+\item[$ k $] \textit{constante do modelo Autorregressivo}
+\item[$ \varepsilon $] \textit{ruído branco}
+\item[$ \theta $] \textit{valor observado}
+\item[$ \hat{\theta} $] \textit{valor estimado}
+\end{simbolos}
+% Fim lista de simbolos
+
+% Lista de abreviações
+\begin{siglas}
+\setcounter{page}{7}
+\addcontentsline{toc}{section}{LISTA DE ABREVIAÇÕES}
+\item[AR] \textit{Acurácia das Operações com Lucro}
+\item[AOL] \textit{Convolutional Neural Network - Rede Neural Convolucional}
+\item[CI] \textit{Carteira Inicial}
+\item[CF] \textit{Carteira Final}
+\item[ET] \textit{Estratégia de Trading}
+\item[FP] \textit{False Positive - Falso Positivo}
+\item[FN] \textit{False Negative - Falso Negativo}
+\item[LSTM] \textit{Long Short-Term Memory}
+\item[MSE] \textit{Mean Squared Error - Erro quadrático médio}
+\item[QAC] \textit{Quantidade de Ações Compradas}
+\item[RC] \textit{Razão entre as Carteiras}
+\item[RMT] \textit{Real Movements Trading}
+\item[TP] \textit{True Positive - Verdadeiro Positivo}
+\item[TN] \textit{True Negative - Verdadeiro Negativo}
+\end{siglas}
+% Fim lista de abreviações
+
+
+\newcommand{\listappendicesname}{ANEXOS}
+\newlistof{appendices}{apc}{\listappendicesname}
+\newcommand{\appendices}[1]{\addcontentsline{apc}{appendices}{#1}}
+
+
+%\listoffigures*
+\cleardoublepage
+
+
+% ---
+% inserir o sumario
+% ---
+\pdfbookmark[0]{\contentsname}{toc}
+\addcontentsline{toc}{section}{SUMÁRIO}
+\tableofcontents*
+%\mainmatter
+\cleardoublepage
+% ---
+
+% RESUMO
+\input{chapters/resumo}
+
+% ELEMENTOS TEXTUAIS
+\textual
+
+% Capitulo 1 - Introdução
+\input{chapters/chapter_1}
+
+% Capitulo 2 - Objetivos
+\input{chapters/chapter_2}
+
+% Capítulo 3 - Revisão de Literatura
+\input{chapters/chapter_3}
+
+% Capítulo 4 - Materiais e Método
+\input{chapters/chapter_4}
+
+% Capítulo 5 - Resultados
+\input{chapters/chapter_5}
+
+% Capítulo 6 - Discussão
+\input{chapters/chapter_6}
+
+% Capítulo 7 - Considerações Finais
+\input{chapters/chapter_7}
+
+% Referências bibliográficas
+\bibliography{bibliografia}
+\newpage
+
+% Glossário
+%
+% Consulte o manual da classe abntex2 para orientações sobre o glossário.
+%
+%\glossary
+
+% Apêndices
+
+% ---
+% Inicia os apêndices
+% ---
+%\begin{apendicesenv}
+
+% Imprime uma página indicando o início dos apêndices
+%\partapendices
+\input{chapters/anexos}
+%\end{apendicesenv}
+% ---
+
+% INDICE REMISSIVO
+\phantompart
+\printindex
+
+\end{document}

@@ -3,6 +3,8 @@
 # PETR4.SA-forecasting
 A collection of PIBIC 2020-2021 codes. Statistical models of time series analysis applied to stock market predictions, compared to CNN and LSTM forecasts. Trading simulation with PETR4.SA stocks.
 
+Topic of the PIBIC: "Evaluation of the Performance of Deep Learning Techniques for the Classification of the Temporal Behavior of Shares".
+
 ## Tested Models
 - [X] **SMA10** (Simple Moving Average of 10 days) 
 - [X] **SMA30** (Simple Moving Average of 30 days)
