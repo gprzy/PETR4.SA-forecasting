@@ -3,6 +3,7 @@
 <img src="https://github.com/gprzy/credit-scoring/blob/main/assets/puc.png" width="30%" height="30%"/>
 
 [![Open in colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/gprzy/PETR4.SA-forecasting/blob/main/PETR4.SA-forecasting.ipynb)
+[![GitHub license](https://img.shields.io/github/license/microsoft/ML-For-Beginners.svg)](https://github.com/gprzy/PETR4.SA-forecasting/blob/main/LICENSE)
 
 A collection of [PIBIC](https://www.pucpr.br/iniciacaocientifica/) 2020-2021 codes. Statistical models of time series analysis applied to stock market predictions, compared to CNN and LSTM forecasts. Trading simulation with [PETR4.SA](https://finance.yahoo.com/quote/PETR4.SA/history?p=PETR4.SA) stocks. This repository includes the scientific paper (along with the [LaTeX](https://www.latex-project.org/) project) written at the end of the project, documenting the steps in more detail.
 
